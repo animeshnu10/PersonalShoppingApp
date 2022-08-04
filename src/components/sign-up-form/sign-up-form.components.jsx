@@ -1,6 +1,6 @@
 import "./sign-up-form.styles.scss";
 import { useState } from "react";
-import { auth,createAuthUserWithEmailAndPassword,createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils";
+import { createAuthUserWithEmailAndPassword,createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
 
@@ -20,7 +20,9 @@ const SignUpForm=()=>{
         setFormFields(defaultFormFields);
     }
     const onHandleChange=(event)=>{
+        console.log(event.target);
         const {name,value}=event.target;
+
 
         setFormFields({ ...formFields, [name]: value });//imp
     }
