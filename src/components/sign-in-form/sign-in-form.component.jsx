@@ -4,20 +4,24 @@ import "./sign-in-form.styles.scss";
 import { useState } from "react";
 import {createUserDocumentFromAuth, signInAuthUserWithEmailAndPassword, signInWithGooglePopup} from "../../utils/firebase/firebase.utils";
 
+
 const defaultFormFields={
     email:'',
     password:''
 }
 const SignInForm=()=>{
+    
 
     const[formFields,setFormFields]=useState(defaultFormFields);
     const{email,password}=formFields;
     
+    
+
     const resetFormFields=()=>{
         setFormFields(defaultFormFields);
     }
 const onHandleChange=(event)=>{
-    console.log(event.target);
+  //  console.log(event.target);
     const{name,value}=event.target;//destructure
     setFormFields({...formFields,[name]:value});
 };
@@ -26,8 +30,10 @@ const handleSubmit=async(event)=>{
     event.preventDefault();
 
 try{
-    const response=await signInAuthUserWithEmailAndPassword(email,password);
-    console.log(response);
+    const {user}=await signInAuthUserWithEmailAndPassword(email,password);
+   // console.log(response);
+   
+
     resetFormFields();
 }
 catch(error){

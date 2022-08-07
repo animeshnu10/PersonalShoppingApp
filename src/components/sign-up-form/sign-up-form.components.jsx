@@ -14,7 +14,8 @@ const SignUpForm=()=>{
 
     const[formFields,setFormFields]=useState(defaultFormFields);
     const{displayName,email,password,confirmPassword}=formFields;
-    console.log(formFields);
+    //console.log(formFields);
+    
 
     const resetFormFields=()=>{
         setFormFields(defaultFormFields);
@@ -36,6 +37,7 @@ const handleSubmit=async(event)=>{
     
     try{
        const {user}= await createAuthUserWithEmailAndPassword(email,password);
+    
 
     await createUserDocumentFromAuth(user,{displayName})
         console.log(displayName);
@@ -45,6 +47,11 @@ const handleSubmit=async(event)=>{
         {
             alert("Cannot creater user,Email already in use");
         }
+        else if(error.code==='auth/weak-password')
+        {
+            alert("Password should be at least 6 characters ")
+        }
+        console.log(error);
         
     }
     
